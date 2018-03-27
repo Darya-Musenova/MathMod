@@ -29,7 +29,7 @@ names(tb1) = names(tb1) %>%
   str_replace_all("[\\^]","_power_") %>% 
   str_replace_all("[()]","_") 
 glimpse(tb1)
-#Оставляем только численные данные 
+#????????? ?????? ????????? ?????? 
 sapply(tb1,is.numeric)
 tb1_numeric = tb1 [,sapply (tb1,is.numeric) ]
 tb1_non_numeric = tb1[,!sapply(tb1,is.numeric) ]
@@ -67,5 +67,19 @@ formula3 = as.formula(paste("co2_flux ~ co2_flux + h2o_mole_fraction +
 mod4=lm(formula3, data = tb1) 
 anova(mod4) 
 summary(mod4)
+mod5 = lm(co2_flux ~ (co2_flux + h2o_mole_fraction + 
+                            h2o_mixing_ratio + air_density + air_heat_capacity + 
+                            e + un_co2_flux + h2o.1) ^2, data = tb1)
+mod5
+anova(mod5)
+summary(mod5)
+mod6 = lm(co2_flux ~ (co2_flux + h2o_mole_fraction + 
+                        h2o_mixing_ratio + un_co2_flux + h2o.1) ^2, data = tb1)                 
+mod6      
+anova(mod6)
+summary(mod6)
+mod7 = lm(co2_flux ~ ( h2o_mole_fraction + h2o.1) ^2, data = tb1)   
+anova(mod7)
+summary(mod7)
 
 
