@@ -78,8 +78,17 @@ mod6 = lm(co2_flux ~ (co2_flux + h2o_mole_fraction +
 mod6      
 anova(mod6)
 summary(mod6)
-mod7 = lm(co2_flux ~ ( h2o_mole_fraction + h2o.1) ^2, data = tb1)   
+mod7 = lm(co2_flux ~ (co2_flux + h2o_mole_fraction + 
+                            h2o_mixing_ratio + un_co2_flux + h2o.1+co2_flux:h2o_mole_fraction + 
+                            co2_flux:h2o_mixing_ratio +co2_flux:un_co2_flux + co2_flux:h2o.1 + 
+                            h2o_mole_fraction:un_co2_flux + h2o_mole_fraction:h2o.1 + 
+                            h2o_mixing_ratio:un_co2_flux)- h2o_mixing_ratio:h2o.1 - un_co2_flux:h2o.1, data = tb1)  
 anova(mod7)
 summary(mod7)
-
+mod8 = lm(co2_flux ~ (co2_flux + un_co2_flux + co2_flux:h2o_mole_fraction + 
+                        co2_flux:h2o_mixing_ratio + h2o_mole_fraction:un_co2_flux  + 
+                        h2o_mixing_ratio:un_co2_flux)- h2o_mixing_ratio:h2o.1 - un_co2_flux:h2o.1 - h2o_mole_fraction - 
+                        h2o_mixing_ratio - h2o.1 - co2_flux:un_co2_flux - co2_flux:h2o.1 - h2o_mole_fraction:h2o.1, data = tb1) 
+anova(mod8)
+summary(mod8)
 
